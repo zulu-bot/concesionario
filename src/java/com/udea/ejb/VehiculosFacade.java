@@ -28,5 +28,5 @@ public class VehiculosFacade extends AbstractFacade<Vehiculos> implements Vehicu
     public VehiculosFacade() {
         super(Vehiculos.class);
     }
-    
+
 }

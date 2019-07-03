@@ -42,7 +42,7 @@ public class Vehiculos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "placa")
-    private Integer placa;
+    private String placa;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 4)
@@ -57,20 +57,20 @@ public class Vehiculos implements Serializable {
     public Vehiculos() {
     }
 
-    public Vehiculos(Integer placa) {
+    public Vehiculos(String placa) {
         this.placa = placa;
     }
 
-    public Vehiculos(Integer placa, String modelo) {
+    public Vehiculos(String placa, String modelo) {
         this.placa = placa;
         this.modelo = modelo;
     }
 
-    public Integer getPlaca() {
+    public String getPlaca() {
         return placa;
     }
 
-    public void setPlaca(Integer placa) {
+    public void setPlaca(String placa) {
         this.placa = placa;
     }
 
