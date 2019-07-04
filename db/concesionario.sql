@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2019 at 07:03 PM
+-- Generation Time: Jul 04, 2019 at 04:09 AM
 -- Server version: 8.0.16
 -- PHP Version: 7.3.6
 
@@ -36,6 +36,13 @@ CREATE TABLE `clientes` (
   `vehiculo` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `nombre`, `telefono`, `correo`, `vehiculo`) VALUES
+(1379, 'daniel roldan', 5555555, 'dlaij@gmail.com', 'ddd444');
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +55,13 @@ CREATE TABLE `vehiculos` (
   `propietario` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `vehiculos`
+--
+
+INSERT INTO `vehiculos` (`placa`, `modelo`, `propietario`) VALUES
+('ddd444', '2001', 1379);
+
 -- --------------------------------------------------------
 
 --
@@ -59,6 +73,13 @@ CREATE TABLE `ventas` (
   `vehiculo` varchar(20) NOT NULL,
   `cliente` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `ventas`
+--
+
+INSERT INTO `ventas` (`factura`, `vehiculo`, `cliente`) VALUES
+(1, 'ddd444', 1379);
 
 --
 -- Indexes for dumped tables
