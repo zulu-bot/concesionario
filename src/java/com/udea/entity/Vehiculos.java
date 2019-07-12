@@ -6,6 +6,7 @@
 package com.udea.entity;
 
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -14,11 +15,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -41,19 +44,26 @@ public class Vehiculos implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "placa")
     private String placa;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 4)
+    @Size(max = 20)
     @Column(name = "modelo")
     private String modelo;
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Column(name = "img")
+    private byte[] img;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculo", fetch = FetchType.LAZY)
     private Collection<Ventas> ventasCollection;
-    @JoinColumn(name = "propietario", referencedColumnName = "Id")
+    @JoinColumn(name = "propietario", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clientes propietario;
 
+    @Transient
+    private String base64Img;
+    
     public Vehiculos() {
     }
 
@@ -61,9 +71,9 @@ public class Vehiculos implements Serializable {
         this.placa = placa;
     }
 
-    public Vehiculos(String placa, String modelo) {
+    public Vehiculos(String placa, byte[] img) {
         this.placa = placa;
-        this.modelo = modelo;
+        this.img = img;
     }
 
     public String getPlaca() {
@@ -82,6 +92,14 @@ public class Vehiculos implements Serializable {
         this.modelo = modelo;
     }
 
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
+    }
+
     @XmlTransient
     public Collection<Ventas> getVentasCollection() {
         return ventasCollection;
@@ -90,6 +108,16 @@ public class Vehiculos implements Serializable {
     public void setVentasCollection(Collection<Ventas> ventasCollection) {
         this.ventasCollection = ventasCollection;
     }
+
+    public String getBase64Img() {
+        return Base64.getEncoder().encodeToString(this.img);
+    }
+
+    public void setBase64Img(String base64Img) {
+        this.base64Img = base64Img;
+    }
+    
+    
 
     public Clientes getPropietario() {
         return propietario;

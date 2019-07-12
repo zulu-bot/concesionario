@@ -37,7 +37,7 @@ public class Ventas implements Serializable {
     @NotNull
     @Column(name = "factura")
     private Integer factura;
-    @JoinColumn(name = "cliente", referencedColumnName = "Id")
+    @JoinColumn(name = "cliente", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Clientes cliente;
     @JoinColumn(name = "vehiculo", referencedColumnName = "placa")

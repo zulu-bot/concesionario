@@ -33,8 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Clientes.findAll", query = "SELECT c FROM Clientes c")
     , @NamedQuery(name = "Clientes.findById", query = "SELECT c FROM Clientes c WHERE c.id = :id")
     , @NamedQuery(name = "Clientes.findByNombre", query = "SELECT c FROM Clientes c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Clientes.findByCorreo", query = "SELECT c FROM Clientes c WHERE c.correo = :correo")
     , @NamedQuery(name = "Clientes.findByTelefono", query = "SELECT c FROM Clientes c WHERE c.telefono = :telefono")
+    , @NamedQuery(name = "Clientes.findByCorreo", query = "SELECT c FROM Clientes c WHERE c.correo = :correo")
     , @NamedQuery(name = "Clientes.findByVehiculo", query = "SELECT c FROM Clientes c WHERE c.vehiculo = :vehiculo")})
 public class Clientes implements Serializable {
 
@@ -42,7 +42,7 @@ public class Clientes implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Id")
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @NotNull
@@ -51,13 +51,13 @@ public class Clientes implements Serializable {
     private String nombre;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "telefono")
+    private int telefono;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "correo")
     private String correo;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "telefono")
-    private int telefono;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 6)
@@ -75,11 +75,11 @@ public class Clientes implements Serializable {
         this.id = id;
     }
 
-    public Clientes(Integer id, String nombre, String correo, int telefono, String vehiculo) {
+    public Clientes(Integer id, String nombre, int telefono, String correo, String vehiculo) {
         this.id = id;
         this.nombre = nombre;
-        this.correo = correo;
         this.telefono = telefono;
+        this.correo = correo;
         this.vehiculo = vehiculo;
     }
 
@@ -99,20 +99,20 @@ public class Clientes implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
     public int getTelefono() {
         return telefono;
     }
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getVehiculo() {
